@@ -1,0 +1,357 @@
+/* Workout Log Styles */
+
+.calendar-container {
+    margin-bottom: 2rem;
+    background-color: var(--light-background); /* Use light-background for cards */
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.calendar-nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.calendar-nav a:hover {
+    text-decoration: underline;
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.calendar-table th,
+.calendar-table td {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.calendar-table th {
+    background-color: var(--light-background); /* Use light-background for table headers */
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.calendar-table td {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calendar-table td:hover {
+    background-color: var(--hover-color); /* Use hover color for hover */
+    color: var(--text-color);
+}
+
+.calendar-table td.today {
+    border: 2px solid var(--secondary-color);
+}
+
+.calendar-table td.has-workout {
+    background-color: color-mix(in srgb, var(--primary-color) 10%, white); /* Light tint of primary for workouts */
+    color: var(--primary-color); /* Primary color text for workouts */
+}
+
+.calendar-table td.selected-date {
+    background-color: var(--primary-color); /* Primary color for selected date */
+    color: var(--light-background);
+}
+
+/* Workout Log Display Styles */
+.workout-log-display {
+    margin-top: 2rem;
+    background-color: var(--light-background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.workout-log-display h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.workout-log-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.workout-log-table th,
+.workout-log-table td {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.workout-log-table th {
+     background-color: var(--light-background);
+     color: var(--text-color);
+     font-weight: bold;
+}
+
+.workout-log-table tbody tr:nth-child(even) {
+    background-color: var(--hover-color); /* Use hover color for even rows */
+}
+
+.workout-log-table td:last-child { /* Actions column */
+    text-align: center;
+}
+
+.workout-log-table td .btn {
+    padding: 8px 15px; /* Slightly more padding for comfort */
+    font-size: 0.9em; /* Slightly larger font size */
+    border-radius: 4px; /* Slightly less rounded corners */
+}
+
+.workout-log-table td .btn-secondary {
+    background-color: var(--accent-color);
+    color: var(--light-background);
+}
+
+.workout-log-table td .btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--accent-color) 80%, black);
+}
+
+.workout-log-table td .btn-danger {
+    background-color: var(--danger-color);
+    color: var(--light-background);
+}
+
+.workout-log-table td .btn-danger:hover {
+    background-color: color-mix(in srgb, var(--danger-color) 80%, black);
+}
+
+/* Added for table responsiveness */
+@media (max-width: 600px) {
+    .workout-log-table,
+    .workout-log-table thead,
+    .workout-log-table tbody,
+    .workout-log-table th,
+    .workout-log-table td,
+    .workout-log-table tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, so they can be read by screenreaders) */
+    .workout-log-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .workout-log-table tr {
+        border: 1px solid var(--border-color);
+        margin-bottom: 5px;
+    }
+
+    .workout-log-table td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    .workout-log-table td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values come from the display: block; behavior */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        content: attr(data-label);
+        text-align: left;
+    }
+
+    /* Specific styling for the Actions column */
+    .workout-log-table td[data-label="Actions"] {
+        text-align: right; /* Align buttons to the right */
+        padding-top: 10px; /* Add some space above the buttons */
+        padding-bottom: 10px; /* Add some space below the buttons */
+        display: flex; /* Use flexbox for button layout */
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: flex-end; /* Align buttons to the right within the flex container */
+    }
+
+    .workout-log-table td[data-label="Actions"] .btn {
+        width: auto; /* Allow buttons to take their natural width */
+        margin-bottom: 5px; /* Add space between stacked buttons */
+        margin-left: auto; /* Push buttons to the right */
+        margin-right: 0; /* Ensure no right margin */
+    }
+
+     .workout-log-table td[data-label="Actions"] .btn:last-child {
+         margin-bottom: 0; /* Remove bottom margin for the last button */
+     }
+}
+
+/* Responsive adjustments for calendar - if needed, already handled somewhat by max-width */
+@media (max-width: 768px) {
+    .calendar-container,
+    .workout-log-display {
+        padding: 1rem;
+    }
+
+    .calendar-table th,
+    .calendar-table td,
+    .workout-log-table th,
+    .workout-log-table td {
+        padding: 8px;
+    }
+
+    .calendar-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .calendar-table th,
+    .calendar-table td,
+    .workout-log-table th,
+    .workout-log-table td {
+        font-size: 0.9rem;
+    }
+}
+
+/* Style for days with workouts */
+.calendar-table td.has-workout:not(:empty)::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--secondary-color); /* Use secondary color for indicator */
+    border-radius: 50%;
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+}
+
+/* Form styles - reuse from style.css or add specific ones */
+.form-container {
+     background-color: var(--light-background); /* Use light-background for form containers */
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 2px 4px var(--shadow-color);
+     margin-top: 20px;
+     margin-bottom: 20px;
+}
+
+.form-container h2 {
+     margin-top: 0;
+     color: var(--primary-color);
+}
+
+.form-group {
+     margin-bottom: 15px;
+}
+
+.form-group label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: bold;
+     color: var(--text-color);
+}
+
+.form-control {
+     width: 100%;
+     padding: 10px; /* More comfortable padding */
+     border: 1px solid var(--border-color);
+     border-radius: 4px;
+     box-sizing: border-box;
+     color: var(--text-color);
+     background-color: var(--background-color); /* Slightly off-white for inputs */
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-color) 20%, transparent); /* Soft focus ring */
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-background);
+}
+
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--primary-color) 80%, black);
+}
+
+.btn-secondary {
+    background-color: var(--light-text-color);
+    color: var(--light-background);
+}
+
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--light-text-color) 80%, black);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: var(--light-background);
+}
+
+.btn-danger:hover {
+    background-color: color-mix(in srgb, var(--danger-color) 80%, black);
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.8em;
+}
+
+/* Responsive adjustments for calendar - if needed, already handled somewhat by max-width */
+@media (max-width: 768px) {
+    .calendar-container {
+        padding: 10px;
+    }
+
+    .calendar-table th,
+    .calendar-table td {
+        padding: 8px 3px; /* Reduce padding on smaller screens */
+        font-size: 0.9em; /* Slightly smaller font */
+    }
+} 

@@ -1,0 +1,197 @@
+/* Sidebar styles */
+.sidebar {
+    width: 250px; /* Expanded width */
+    background-color: var(--primary-color); /* Using primary color for sidebar */
+    color: var(--light-background); /* White text for sidebar */
+    position: fixed; /* Fixed position */
+    height: 100%; /* Full height */
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease; /* Smooth transition for width change */
+    overflow-x: hidden; /* Hide horizontal overflow */
+    padding-top: 20px; /* Space from the top */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.sidebar.collapsed {
+    width: 50px; /* Collapsed width: more compact */
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
+
+.sidebar-header h3 {
+    color: var(--light-background); /* White text */
+    font-size: 1.2rem;
+    margin: 0;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow when collapsed */
+    text-overflow: ellipsis; /* Add ellipsis if text is truncated */
+}
+
+.sidebar.collapsed .sidebar-header h3 {
+    visibility: hidden; /* Hide text when collapsed */
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    color: var(--light-background); /* White text */
+    text-decoration: none;
+    padding: 10px 15px; /* Padding for links */
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav li a i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 1.1rem;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.sidebar.collapsed .sidebar-nav li a i {
+    margin-right: 0; /* Remove space when collapsed */
+    font-size: 1.5rem; /* Slightly larger icon when collapsed */
+}
+
+/* Default state for span: visible and takes space */
+.sidebar-nav li a span {
+    white-space: normal; /* Allow text to wrap by default if needed */
+    overflow: visible;   /* Ensure text is not hidden by overflow by default */
+    text-overflow: clip; /* No ellipsis by default */
+    opacity: 1;          /* Ensure text is visible by default */
+    width: auto;         /* Ensure text takes natural width by default */
+    margin-left: 10px;   /* Default space between icon and text */
+    transition: opacity 0.3s ease, width 0.3s ease, margin-left 0.3s ease;
+}
+
+/* Hide text only when sidebar is truly collapsed (icons-only) on larger screens */
+@media (min-width: 769px) {
+    .sidebar.collapsed .sidebar-nav li a span {
+        opacity: 0;          /* Hide text */
+        width: 0;            /* Collapse width */
+        margin-left: 0;      /* Remove margin */
+        white-space: nowrap; /* Apply nowrap only when hiding for ellipsis to work */
+        overflow: hidden;    /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis */
+    }
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a.active {
+    background-color: color-mix(in srgb, var(--primary-color) 80%, black); /* Darker primary for hover/active */
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 250px; /* Space for expanded sidebar */
+    padding: 20px;
+    transition: margin-left 0.3s ease; /* Smooth transition for margin */
+}
+
+.main-content.shifted {
+    margin-left: 50px; /* Adjust margin for new collapsed sidebar width */
+}
+
+/* Toggle button */
+.sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px; /* Maintain a slight roundness */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px; /* Reduced padding */
+    font-size: 1.1em; /* Slightly smaller icon */
+    transition: background-color 0.3s ease, transform 0.2s ease, left 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background-color: var(--button-hover-color);
+    transform: scale(1.05); /* Subtle scale on hover */
+}
+
+.sidebar.collapsed .sidebar-toggle {
+    /* When sidebar is collapsed, on desktop, the toggle button moves */
+    /* This is handled by a separate media query for desktop */
+}
+
+.sidebar-toggle.shifted {
+    /* This class is added by JS when sidebar is open */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0; /* Hide sidebar by default on smaller screens */
+        transform: translateX(-100%);
+    }
+
+    .sidebar.collapsed {
+        width: 280px; /* New expanded width on mobile */
+        transform: translateX(0); /* Show sidebar */
+        box-shadow: 2px 0 5px var(--shadow-color); /* Add shadow for depth */
+    }
+
+    .sidebar.collapsed .sidebar-header h3 {
+        visibility: visible; /* Ensure header text is visible */
+        white-space: normal; /* Allow text to wrap if necessary */
+        overflow: visible; /* Show overflow */
+        text-overflow: clip; /* No ellipsis */
+    }
+
+    .main-content {
+        margin-left: 0; /* No margin when sidebar is hidden */
+    }
+
+    .main-content.shifted {
+        margin-left: 0; /* No margin, sidebar will overlay */
+    }
+
+    .sidebar-toggle {
+        left: 15px;
+        background-color: var(--primary-color); /* Use primary for toggle on small screens */
+    }
+
+    .sidebar-toggle.shifted {
+        left: 290px; /* Adjust based on new mobile expanded width + some margin */
+    }
+
+    /* Overlay for main content when sidebar is open on mobile */
+    .main-content.overlay-active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+        z-index: 999; /* Below sidebar, above main content */
+        backdrop-filter: blur(2px); /* Optional: subtle blur effect */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar.collapsed {
+        width: 80vw; /* Take 80% viewport width on very small screens */
+        left: 0;
+        border-right: none;
+    }
+
+    .sidebar-toggle.shifted {
+        left: calc(80vw + 10px); /* Position toggle to the right of 80% sidebar */
+    }
+} 

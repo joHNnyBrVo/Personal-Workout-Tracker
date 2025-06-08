@@ -1,0 +1,159 @@
+/* Authentication Page Styles */
+
+body.auth-page {
+    background-color: var(--background-color); /* Use a consistent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Add some padding for smaller screens */
+    box-sizing: border-box;
+}
+
+.auth-container {
+    background-color: var(--light-background);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    width: 100%;
+    max-width: 450px; /* Standard width for auth forms */
+    box-sizing: border-box;
+    text-align: center;
+    transform: translateY(0); /* Initial state for animation */
+    opacity: 1; /* Initial state for animation */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.auth-container.hidden {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+.auth-container h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.auth-form .form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form .form-control:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent);
+}
+
+.password-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-container .form-control {
+    padding-right: 40px; /* Make space for the toggle icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--light-text-color);
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+.auth-form .btn-primary {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+}
+
+.auth-form .btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.auth-links p {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.auth-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: text-decoration 0.3s ease;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.alert {
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    body.auth-page {
+        padding: 15px;
+    }
+
+    .auth-container {
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .auth-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .auth-form .form-control,
+    .auth-form .btn-primary {
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .auth-links p {
+        font-size: 0.9rem;
+    }
+
+    .toggle-password {
+        font-size: 0.9rem;
+        right: 10px;
+    }
+} 

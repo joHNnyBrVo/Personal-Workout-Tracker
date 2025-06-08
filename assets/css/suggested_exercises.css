@@ -1,0 +1,136 @@
+/* Suggested Exercises Styles */
+
+.suggested-exercises {
+    margin-top: 2rem;
+}
+
+.suggested-exercises .dashboard-card {
+    padding: 1.5rem;
+}
+
+.suggested-exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.suggested-item {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 120px; /* Adjusted height since the button is removed */
+}
+
+.suggested-item:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-3px);
+}
+
+.suggested-item h4 {
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+}
+
+.suggested-item p {
+    color: var(--light-text-color);
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 0; /* No margin below description as there's no button */
+    flex-grow: 1;
+}
+
+.suggested-item .btn {
+    /* This block can be removed or kept if other buttons use .btn within suggested-item */
+    display: none; /* Hide the button if it's not removed from HTML */
+}
+
+.add-exercise-section {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.add-exercise-section .btn {
+    background-color: var(--primary-color);
+    color: var(--light-background);
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-exercise-section .btn:hover {
+    background-color: color-mix(in srgb, var(--primary-color) 80%, black);
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .suggested-exercises-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .suggested-item {
+        padding: 0.8rem;
+        min-height: 100px; /* Adjusted height for mobile without button */
+    }
+
+    .suggested-item h4 {
+        font-size: 1rem;
+    }
+
+    .suggested-item p {
+        font-size: 0.8rem;
+    }
+
+    .suggested-item .btn {
+        display: none; /* Ensure button is hidden */
+    }
+
+    .add-exercise-section .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .suggested-exercises-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .suggested-item {
+        flex-direction: column; /* Changed back to column for simpler display without button */
+        justify-content: center;
+        align-items: center;
+        min-height: auto;
+    }
+
+    .suggested-item h4 {
+        margin-bottom: 0.25rem; /* Re-add some margin */
+        flex-grow: 0;
+        text-align: center;
+    }
+
+    .suggested-item p {
+        display: block; /* Show description again if it fits, now that button is gone */
+        font-size: 0.85rem; /* Keep consistent font size */
+        margin-bottom: 0.5rem; /* Add some space below description */
+    }
+
+    .suggested-item .btn {
+        display: none; /* Ensure button is hidden */
+        margin-top: 0;
+        margin-left: 0;
+    }
+} 
