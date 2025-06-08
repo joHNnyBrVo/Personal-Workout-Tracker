@@ -13,13 +13,12 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Get workout log ID from POST data
-$log_id = filter_var($_POST['log_id'] ?? null, FILTER_VALIDATE_INT);
-
-// Basic validation
-if ($log_id === false || $log_id === null) {
+if (!isset($_GET['id'])) {
     echo json_encode(['error' => 'Invalid or missing workout log ID.']);
     exit();
 }
+
+$log_id = $_GET['id'];
 
 try {
     // Prepare a delete statement, ensuring the log belongs to the logged-in user
