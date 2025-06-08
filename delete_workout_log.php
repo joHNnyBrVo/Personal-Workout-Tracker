@@ -14,8 +14,8 @@ $user_id = $_SESSION['user_id'];
 
 // Get workout log ID from POST data
 if (!isset($_GET['id'])) {
-    echo json_encode(['error' => 'Invalid or missing workout log ID.']);
-    exit();
+    header("location: workout_log.php");
+    exit;
 }
 
 $log_id = $_GET['id'];
@@ -29,13 +29,19 @@ try {
 
     // Check if a row was affected (meaning a workout log was deleted)
     if ($stmt->rowCount()) {
-        echo json_encode(['success' => true, 'message' => 'Workout log deleted successfully!']);
+        // echo json_encode(['success' => true, 'message' => 'Workout log deleted successfully!']);
+        header("location: workout_log.php");
+        exit;
     } else {
         // This could mean the ID was valid but didn't belong to the user, or wasn't found
-        echo json_encode(['error' => 'Workout log not found or does not belong to the user.']);
+        // echo json_encode(['error' => 'Workout log not found or does not belong to the user.']);
+        header("location: workout_log.php");
+        exit;
     }
 
 } catch(PDOException $e) {
-    echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+    // echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+    header("location: workout_log.php");
+    exit;
 }
 ?> 
