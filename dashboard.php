@@ -77,7 +77,7 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar">
         <div class="sidebar-header">
             <h3>Workout Tracker</h3>
         </div>
@@ -184,17 +184,20 @@ try {
 
     <script>
         // Sidebar toggle functionality
-        const sidebar = document.getElementById('sidebar');
+        const sidebars = document.querySelectorAll('.sidebar');
         const mainContent = document.getElementById('mainContent');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarToggleIcon = sidebarToggle.querySelector('i');
 
         sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
+            sidebars.forEach(sidebar => {
+                sidebar.classList.toggle('collapsed');
+            });
             mainContent.classList.toggle('shifted');
             sidebarToggle.classList.toggle('shifted');
 
-            if (sidebar.classList.contains('collapsed')) {
+            // Check the first sidebar for collapsed state
+            if (sidebars[0].classList.contains('collapsed')) {
                 sidebarToggleIcon.classList.remove('fa-chevron-right');
                 sidebarToggleIcon.classList.add('fa-chevron-left');
                 mainContent.classList.add('overlay-active');
@@ -207,8 +210,10 @@ try {
 
         // Close sidebar when clicking on the overlay (main content) on mobile
         mainContent.addEventListener('click', function() {
-            if (window.innerWidth <= 768 && sidebar.classList.contains('collapsed')) {
-                sidebar.classList.remove('collapsed');
+            if (window.innerWidth <= 768 && sidebars[0].classList.contains('collapsed')) {
+                sidebars.forEach(sidebar => {
+                    sidebar.classList.remove('collapsed');
+                });
                 mainContent.classList.remove('shifted');
                 mainContent.classList.remove('overlay-active');
                 sidebarToggleIcon.classList.remove('fa-chevron-left');
