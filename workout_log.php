@@ -417,13 +417,18 @@ $calendar_html = generate_calendar($current_month, $current_year, $workout_dates
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 if (data.success) {
                     alert(data.message); // Show success message
+                    
                     // Hide the edit form
                     hideEditWorkoutLogForm();
+                    
                     // Reload workouts for the current selected date
-                    const selectedDate = document.querySelector('.calendar-table-new td.selected-date').getAttribute('data-date');
-                    loadWorkouts(selectedDate);
+                    // const selectedDate = document.querySelector('.calendar-table-new td.selected-date').getAttribute('data-date');
+                    // loadWorkouts(selectedDate);
+
+                    location.reload();
                 } else {
                     alert('Error: ' + data.error); // Show error message
                 }
